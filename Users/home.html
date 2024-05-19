@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <style>
+    .set_hover:hover {
+      background-color: #16a34a;
+    }
+  </style>
+</head>
+
+
+<body onload="showBtn()">
+  <div class="color1 mb-4" style="width: 100%;height: 100%;">
+    <nav class="navbar color2">
+      <div class="color2 w-25" style="text-align: left;margin-left: 25px;">
+        <a class="navbar-brand" href="#">
+          <img src="/images/BrandLogo.png" alt="Logo" width="140" height="45" class="d-inline-block align-text-top">
+        </a>
+      </div>
+      <div style="float: right;">
+        <img src="/images/profile.png" width="50px" height="50px" alt="">
+        <button class="btn" type="button"><b style="color: white;" id="status">No Account Found</b></button>
+        <!--Sign up--------------------------------------------------------------------------->
+
+        <div class="offcanvas offcanvas-end" style="background-color: #4d7c0f;" tabindex="-1" id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header color2">
+            <h5 class="offcanvas-title fontColor" id="offcanvasRightLabel">Sign up</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body fontColor">
+            <div class="alert alert-success" role="alert" id="alert-success" style="display: none;">
+
+            </div>
+            <div class="alert alert-danger" role="alert" id="alert-danger" style="display: none;">
+
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com">
+              <label for="floatingInput" style="color: #F55951;">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="signUpPassword" placeholder="Password">
+              <label for="floatingPassword" style="color: #F55951;">Password</label>
+            </div>
+
+            <div class="spinner-border text-light mt-2 mb-2" id="loader" role="status"
+              style="text-align: center;margin-left: 50%;margin-right: 50%;display: none;">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="div-1" class="mt-3">
+              <h4>User Details</h4>
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="signUpFirstName" placeholder="First Name">
+                <label for="floatingInput" style="color: #F55951;">First Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="signUpMiddleName" placeholder="Middle Name">
+                <label for="floatingInput" style="color: #F55951;">Middle Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="signUpLastName" placeholder="Last Name">
+                <label for="floatingInput" style="color: #F55951;">Last Name</label>
+              </div>
+              <p>Please provide a current mobile number. You will receive call when order has been reach.</p>
+              <div class="form-floating mb-3">
+                <input type="tel" class="form-control" id="signUpMobileNumber" placeholder="Mobile Number">
+                <label for="floatingInput" style="color: #F55951;">Mobile Number</label>
+              </div>
+
+              <select class="form-select form-select-lg mb-3" id="signUpCity" aria-label=".form-select-lg example"
+                style="color: #F55951;">
+                <option selected>City</option>
+                <option value="Wardha">Wardha</option>
+              </select>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="signUpAddress" placeholder="Address">
+                <label for="floatingInput" style="color: #F55951;">Address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="signUpRoomNumber" placeholder="Room Number(optional)">
+                <label for="floatingInput" style="color: #F55951;">Room Number(Optional)</label>
+              </div>
+              <div class="spinner-border text-light mt-2 mb-2" id="loader1" role="status"
+                style="text-align: center;margin-left: 50%;margin-right: 50%;display: none;">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <button type="button" class="btn btn-outline-light mt-3" id="signUp"><b>Sign up</b><img
+                  src="/images/success.png" width="30px" height="30px" style="margin-left: 5px;display: none;"
+                  id="success"></button>
+            </div>
+          </div>
+        </div>
+        <!--Sign up------------------------------------------------------------------------------->
+
+        <!---Sign out--------------------------------------------------------------------------------->
+
+
+
+        <div class="offcanvas offcanvas-end" style="background-color: #4d7c0f;" tabindex="-1" id="offcanvasRight1"
+          aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header color2 fontColor">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Sign out</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body fontColor">
+            <h4>After Sign out you will have to Sign in again....</h4>
+            <button type="submit" class="btn btn-outline-light mt-3" id="signOut">Sign out</button>
+          </div>
+        </div>
+        <!---Sign out--------------------------------------------------------------------------------->
+
+        <!---Sign in ------------------------------------------------------------------------------------------->
+
+        <div class="offcanvas offcanvas-end" style="background-color: #4d7c0f;" tabindex="-1" id="offcanvasRight2"
+          aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header color2 fontColor">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Sign in</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div class="alert alert-success" role="alert" id="alert-success1" style="display: none;">
+
+            </div>
+            <div class="alert alert-danger" role="alert" id="alert-danger1" style="display: none;"></div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="signInEmail" placeholder="name@example.com">
+              <label for="floatingInput" style="color: #F55951;">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="signInPassword" placeholder="Password">
+              <label for="floatingPassword" style="color: #F55951;">Password</label>
+            </div>
+
+            <div class="spinner-border text-light mt-2 mb-2" id="loader3" role="status"
+              style="text-align: center;margin-left: 50%;margin-right: 50%;display: none;">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+
+            <button type="button" class="btn btn-outline-light mt-3" id="signIn">Sign in</button>
+
+          </div>
+        </div>
+        <!---Sign in ------------------------------------------------------------------------------------------->
+
+      </div>
+    </nav>
+
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel"
+      style="position: relative;width: 100%;">
+      <div class="carousel-inner" style="height: 30rem;">
+        <div class="carousel-item active" data-bs-interval="4000">
+          <img src="/images/splash1.png" class="d-block w-100" alt="..." style="height:30rem;">
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <img src="/images/splash3.gif" class="d-block w-100" alt="..." style="height:30rem;">
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <img src="/images/splash2.gif" class="d-block w-100" alt="..." style="height:30rem">
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" type="button" data-bs-toggle="offcanvas" style="position: absolute;top:70px;left: 25px;"
+      data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><span><img
+          src="/images/menuLogo.png" width="50px" height="50px"></span id="menu"></button>
+    <div class="offcanvas offcanvas-start color2" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+      aria-labelledby="offcanvasWithBothOptionsLabel">
+      <div class="offcanvas-header color2">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body color2 fontColor">
+        <button class="btn set_hover" style="color: aliceblue;font-size: xx-large;" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight1"
+          aria-controls="offcanvasRight"><b>Home</b></button>
+        <button class="btn set_hover" style="color: aliceblue;font-size: xx-large;display: block;" type="button"
+          id="recent_buy" onclick="window.location.replace('recent_buy.html')"><b>Recent Buy</b></button>
+        <button class="btn set_hover" style="color: aliceblue;font-size: xx-large;display: block;" type="button"
+          id="recent_buy" onclick="window.location.replace('requests.html')"><b>Requests</b></button>
+        <button class="btn set_hover" class="text-warning" style="color: rgb(219, 161, 28);font-size: xx-large;"
+          type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight1" aria-controls="offcanvasRight"
+          id="signOutBtn"><b>Sign out</b></button>
+        <button class="btn set_hover" style="color: aliceblue;font-size: xx-large;" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight"
+          id="signInBtn"><b>Sign in</b></button>
+        <button class="btn set_hover" style="color: aliceblue;font-size: xx-large" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+          id="signUpBtn"><b>Sign up</b></button>
+
+      </div>
+    </div>
+
+    <div class="container" style="margin-top: 50px;">
+      <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom: 50px;" id="placeholder1">
+        <div class="col">
+          <div class="card" aria-hidden="true">
+            <img src="/images/soildBackground.png" class="card-img-top" alt="..." width="100%" height="180">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6"></span>
+                <span class="placeholder col-8"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card" aria-hidden="true">
+            <img src="/images/soildBackground.png" class="card-img-top" alt="..." width="100%" height="180">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6"></span>
+                <span class="placeholder col-8"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" aria-hidden="true">
+            <img src="/images/soildBackground.png" class="card-img-top" alt="..." width="100%" height="180">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6"></span>
+                <span class="placeholder col-8"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" aria-hidden="true">
+            <img src="/images/soildBackground.png" class="card-img-top" alt="..." width="100%" height="180">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6"></span>
+                <span class="placeholder col-8"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" aria-hidden="true">
+            <img src="/images/soildBackground.png" class="card-img-top" alt="..." width="100%" height="180">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6"></span>
+                <span class="placeholder col-8"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" aria-hidden="true">
+            <img src="/images/soildBackground.png" class="card-img-top" alt="..." width="100%" height="180">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6"></span>
+                <span class="placeholder col-8"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="container1" style="display: none;"">
+        <div class=" row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="render1">
+      </div>
+    </div>
+  </div>
+  <!----- Off canvas No internet connection-->
+
+  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasTopLabel">Status : <b style="color:red;">Offline</b></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <img src="NoInternetConnectionIcon.png"
+        style="display:block;margin: 0 auto;width: 100px;height: 100px;color: aliceblue;">
+    </div>
+  </div>
+  <!----- Off canvas No internet connection-->
+
+  <!--Footer-->
+  <footer class=" bd-footer py-4 py-md-5 mt-5 color2">
+    <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
+      <div class="row">
+        <div class="col-lg-3 mb-3">
+          <a class="d-inline-flex align-items-center mb-2 text-body-secondary text-decoration-none" href="/"
+            aria-label="Bootstrap">
+            <img src="/images/BrandLogo.png" width="120" height="60" class="d-block me-2" viewBox="0 0 118 94"
+              role="img">
+            <title>Bootstrap</title>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
+              fill="currentColor"></path></svg>
+          </a>
+          <ul class="list-unstyled small fontColor">
+            <li class="mb-2">Designed and built with all the love in the world by the Foodblur team with the help of
+              our contributors</li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+          <h5 style="text-decoration: none;color: aliceblue;">For users</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="home.html" style="text-decoration: none;color: aliceblue;">Home</a></li>
+            <li class="mb-2"><a href="/docs/5.3/" style="text-decoration: none;color: aliceblue;">Profile</a></li>
+            <li class="mb-2"><a href="/docs/5.3/examples/" style="text-decoration: none;color: aliceblue;">--------</a>
+            </li>
+            <li class="mb-2"><a href="https://icons.getbootstrap.com/"
+                style="text-decoration: none;color: aliceblue;">--------</a></li>
+            <li class="mb-2"><a href="https://themes.getbootstrap.com/"
+                style="text-decoration: none;color: aliceblue;">--------</a></li>
+
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 mb-3">
+          <h5 style="text-decoration: none;color: aliceblue;">For food vendor</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a onclick="window.location.replace('../Vendor/vendor_sign_in_sign_up.html')"
+                style="text-decoration: none;color: aliceblue;">Register
+                as food vendor</a></li>
+            <li class="mb-2"><a style="text-decoration: none;color: aliceblue;"
+               onclick="window.location.replace('../Vendor/patner_log_in.html')">Patner Log in</a></li>
+            <li class="mb-2"><a href="/docs/5.3/getting-started/webpack/"
+                style="text-decoration: none;color: aliceblue;">--------</a></li>
+            <li class="mb-2"><a href="/docs/5.3/getting-started/parcel/"
+                style="text-decoration: none;color: aliceblue;">--------</a></li>
+            <li class="mb-2"><a href="/docs/5.3/getting-started/vite/"
+                style="text-decoration: none;color: aliceblue;">--------</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 mb-3">
+          <h5 style="text-decoration: none;color: aliceblue;">For us</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="https://github.com/twbs/bootstrap"
+                style="text-decoration: none;color: aliceblue;">About us</a></li>
+            <li class="mb-2"><a href="https://github.com/twbs/bootstrap/tree/v4-dev"
+                style="text-decoration: none;color: aliceblue;">Terms and Condition</a></li>
+            <li class="mb-2"><a href="https://github.com/twbs/icons"
+                style="text-decoration: none;color: aliceblue;">Privacy policy</a></li>
+            <li class="mb-2"><a href="https://github.com/twbs/rfs"
+                style="text-decoration: none;color: aliceblue;">-------</a></li>
+            <li class="mb-2"><a href="https://github.com/twbs/bootstrap-npm-starter"
+                style="text-decoration: none;color: aliceblue;">-------</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--Footer-->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyChtcoj-0g8LcHXW26Tyqkm_7Xxj8jG5Ow",
+      authDomain: "food-blur.firebaseapp.com",
+      projectId: "food-blur",
+      storageBucket: "food-blur.appspot.com",
+      messagingSenderId: "911842353467",
+      appId: "1:911842353467:web:3107951f8434294e96571e",
+      measurementId: "G-9WG8FE55NE"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const dataRef = firebase.firestore();
+
+    dataRef.collection("vendors").get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+          var data = doc.data();
+          var dataId = doc.id;
+          document.getElementById("placeholder1").style.display = "none"
+          document.getElementById("container1").style.display = "block"
+          document.getElementById("render1").innerHTML += `
+        <div class="col" id=${dataId} onclick="setCardId(this.id)">
+          <div class="card shadow-lg">
+            <img src=${data.ItemURL} class="bd-placeholder-img card-img-top" width="100%" height="225">
+            <div class="card-body">
+              <div class="card-title" style="color: #4d7c0f;"><h3><b>${data.Title}</b></h3></div>
+              <p class="card-text">${data.Address}</p>
+              <strong>Half Taffin Price, delivery charges included </strong>
+              <p class="card-text" style="font-size: 20px;"><b>₹ </b>${data.half_taffin} /-</p>
+            </div>
+          </div>
+        </div>`
+        });
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+
+
+    function setCardId(dataId) {
+      console.log(dataId);
+      sessionStorage.setItem('cardId', dataId)
+      window.location.href = "ItemDetails.html"
+    }
+    function showNotInternetToggle() {
+      const myOffcanvas = document.getElementById('offcanvasTop')
+      const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
+      return bsOffcanvas.show()
+    }
+
+    setInterval(() => {
+      if (window.navigator.onLine == true) {
+        showNotInternethide()
+        console.log("Online")
+      } else {
+        showNotInternetToggle()
+        console.log("Offline")
+      }
+    }, 10000)
+
+
+    function showBtn() {
+      var signUpBtn = document.getElementById("signUpBtn");
+      var signOutBtn = document.getElementById("signOutBtn");
+      var signInBtn = document.getElementById("signInBtn");
+
+      if (localStorage.getItem("userDataId") != null) {
+        signInBtn.style.display = "none";
+        signUpBtn.style.display = "none";
+        signOutBtn.style.display = "block";
+      } else {
+        signInBtn.style.display = "block";
+        signOutBtn.style.display = "none";
+        signUpBtn.style.display = "block";
+      }
+
+    }
+
+    function save_user_details() {
+      document.getElementById("loader1").style.display = "block";
+      var signUpEmail = document.getElementById("signUpEmail").value;
+      var signUpPassword = document.getElementById("signUpPassword").value;
+      var signUpFirstName = document.getElementById("signUpFirstName").value;
+      var signUpMiddleName = document.getElementById("signUpMiddleName").value;
+      var signUpLastName = document.getElementById("signUpLastName").value;
+      var signUpMobileNumber = document.getElementById("signUpMobileNumber").value;
+      var signUpCity = document.getElementById("signUpCity").value;
+      var signUpAddress = document.getElementById("signUpAddress").value;
+      var signUpRoomNumber = document.getElementById("signUpRoomNumber").value;
+      if (localStorage.getItem("userDataId") != null) {
+        dataRef.collection("users").doc(localStorage.getItem("userDataId")).set({
+          email: signUpEmail,
+          password: signUpPassword,
+          firstName: signUpFirstName,
+          middleName: signUpMiddleName,
+          lastName: signUpLastName,
+          mobileNumber: signUpMobileNumber,
+          city: signUpCity,
+          address: signUpAddress,
+          roomNumber: signUpRoomNumber,
+        })
+          .then(() => {
+            document.getElementById("loader1").style.display = "none";
+            document.getElementById("alert-success").style.display = "block";
+            document.getElementById("alert-success").innerHTML = "Details saved successfully";
+            setTimeout(function () {
+              document.getElementById("alert-success").style.display = "none";
+            }, 7000);
+            console.log("Document successfully written!");
+            window.location.reload(true)
+          })
+          .catch((error) => {
+            console.error("Error writing document: ", error);
+            document.getElementById("alert-danger").style.display = "block";
+            document.getElementById("alert-danger").innerHTML = error;
+            setTimeout(function () {
+              document.getElementById("alert-danger").style.display = "none";
+            }, 7000);
+            console.log("Document successfully written!");
+          })
+      }
+    }
+
+    get_greeting_data()
+    function get_greeting_data() {
+      var docRef = dataRef.collection("users").doc(localStorage.getItem("userDataId"));
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+          data = doc.data()
+          console.log(data)
+          data = data['firstName']
+          document.getElementById('status').innerHTML = 'Hii,' + " " + data
+        } else {
+          console.log("No such document!");
+          document.getElementById('status').innerHTML = 'No Account'
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+      });
+    }
+  </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js";
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyChtcoj-0g8LcHXW26Tyqkm_7Xxj8jG5Ow",
+      authDomain: "food-blur.firebaseapp.com",
+      projectId: "food-blur",
+      storageBucket: "food-blur.appspot.com",
+      messagingSenderId: "911842353467",
+      appId: "1:911842353467:web:3107951f8434294e96571e",
+      measurementId: "G-9WG8FE55NE"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+
+
+    document.getElementById("signIn").addEventListener("click", function () {
+      var email = document.getElementById("signInEmail").value;
+      var password = document.getElementById("signInPassword").value;
+      if (email == "") {
+        alert("Email required");
+      } else {
+        if (password == "") {
+          alert("Password required");
+        } else {
+          signIn();
+        }
+      }
+    })
+
+    function signIn() {
+      var email = document.getElementById("signInEmail").value;
+      var password = document.getElementById("signInPassword").value;
+      document.getElementById("loader3").style.display = "block";
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("sign in successfull");
+          document.getElementById("loader3").style.display = "none";
+          checkStatus1();
+          document.getElementById("alert-success1").style.display = "block";
+          document.getElementById("alert-success1").innerHTML = "Sign in successfully";
+          setTimeout(function () {
+            document.getElementById("alert-success1").style.display = "none";
+          }, 7000);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          document.getElementById("alert-danger1").style.display = "block";
+          document.getElementById("alert-danger1").innerHTML = errorMessage;
+          setTimeout(function () {
+            document.getElementById("alert-danger1").style.display = "none";
+          }, 7000);
+
+        });
+
+    }
+
+    document.getElementById("signOut").addEventListener("click", function () {
+      localStorage.removeItem("userDataId");
+      alert("Sign out successfully");
+      window.location.reload(true);
+    })
+
+
+    function checkStatus1() {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const uid = user.uid;
+          localStorage.setItem("userDataId", uid)
+          console.log(uid);
+          window.location.reload(true)
+        } else {
+          console.log("User is sign out");
+        }
+      });
+    }
+
+    function checkStatus() {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const uid = user.uid;
+          localStorage.setItem("userDataId", uid)
+          save_user_details()
+          console.log(uid);
+        } else {
+          console.log("User is sign out");
+        }
+      });
+    }
+    document.getElementById("signUp").addEventListener("click", function () {
+      var signUpEmail = document.getElementById("signUpEmail").value;
+      var signUpPassword = document.getElementById("signUpPassword").value;
+      if (signUpEmail == "") {
+        alert("Email required");
+        return;
+      } else {
+        if (signUpPassword == "") {
+          alert("Password required");
+          return;
+        } else {
+          signUp();
+        }
+      }
+    });
+
+    function signUp() {
+      document.getElementById("loader").style.display = "block"
+      var email = document.getElementById("signUpEmail").value;
+      var password = document.getElementById("signUpPassword").value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log("Regestered Successfully");
+          document.getElementById("loader").style.display = "none"
+          checkStatus();
+          document.getElementById("alert-success").style.display = "block"
+          document.getElementById("alert-success").innerHTML = "Sign in successfully."
+          document.getElementById("success").style.display = "inline-block";
+          document.getElementById("div-1").style.display = "block";
+          document.getElementById("success").setAttribute("disabled", " ");
+          setTimeout(function () {
+            document.getElementById("alert-success").style.display = "none"
+
+          }, 7000)
+        }).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          document.getElementById("loader").style.display = "none"
+          console.log(error);
+          document.getElementById("alert-danger").style.display = "block"
+          document.getElementById("alert-danger").innerHTML = errorMessage;
+          setTimeout(function () {
+            document.getElementById("alert-danger").style.display = "none"
+
+          }, 7000)
+        })
+    };
+  </script>
+
+</body>
+
+</html>

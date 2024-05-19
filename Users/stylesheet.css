@@ -1,0 +1,36 @@
+
+
+.color1 {
+    background-color: #f7f0f0;
+}
+
+.color2 {
+    background-color: #4d7c0f;
+}
+
+.fontColor {
+    color: rgb(207, 200, 192);
+}
+
+a:hover {
+    font-size: larger;
+    color: rgb(76, 74, 72);
+}
+
+#heading {
+    padding: 50px;
+    color: #F55951;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid rgb(214, 33, 33);
+    padding: 15px;
+}

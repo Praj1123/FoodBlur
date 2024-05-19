@@ -1,0 +1,540 @@
+<!doctype html>
+<html class="scroll-smooth hover:scroll-auto">
+
+<head>
+    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="productDetails.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+  </style>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                        background: 'black'
+                    }
+                }
+            }
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-slant-200">
+    <div class="bd-example border-0">
+        <nav class="navbar navbar-expand-lg bg-gradient-to-r from-white to-lime-700">
+            <div class="container-fluid">
+                <p class="navbar-brand fs-3" style="color: #4d7c0f;" href="#"><b><i>FoodBlur</i></b></p>
+                <div>
+                    <span class="container">
+                        <div class="float-right round-5 position-relative" style="display: inline-block;"><b
+                                style="color: white;" id="status"><button class="btn btn-outline-warning" type="button"
+                                    onclick="window,location.replace('vendor_sign_in_sign_up.html')">Sign
+                                    in</button></b></div>
+                    </span>
+                </div>
+            </div>
+        </nav>
+
+        <nav class="navbar navbar-expand-lg bg-gradient-to-r from-white to-lime-700">
+            <button type="button" class="btn text-lime-700 border-0 m-1 hover:bg-green-700 font-bold select"
+                onclick="window.location.href='DashBoard.html'">Dashboard</button>
+            <button type="button" class="btn text-lime-700 m-1 hover:bg-green-700 font-bold"
+                onclick="window.location.href='create_kitchen.html'">Your Kitchen</button>
+            <button type="button" class="btn text-lime-700 m-1 hover:bg-green-700 font-bold" data-bs-toggle="modal"
+                data-bs-target="#exampleModal5" data-bs-whatever="@getbootstrap"
+                onclick="window.location.href='active_subscription.html'">Active Subscriber</button>
+            <button type="button" class="btn text-lime-700 m-1 hover:bg-green-700 font-bold" data-bs-toggle="modal"
+                data-bs-target="#exampleModal5" data-bs-whatever="@getbootstrap">Request's for Break</button>
+            <button type="button" class="btn text-lime-700 m-1 hover:bg-green-700 font-bold" data-bs-toggle="modal"
+                data-bs-target="#exampleModal6" data-bs-whatever="@getbootstrap" onclick="get_menu_data()">Check
+                Menu</button>
+            <button type="button" class="btn text-lime-700 m-1 hover:bg-green-700 font-bold" data-bs-toggle="modal"
+                data-bs-whatever="@getbootstrap" onclick="window.location.href='add_patner.html'">Add Patner</button>
+        </nav>
+    </div>
+    <div class="modal fade" id="exampleModal5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" style="position: relative;">
+                    <h1 class="modal-title fs-5 text-light" id="staticBackdropLabel">Service Profile</h1>
+                    <div class="spinner-border text-warning" role="status" id="loader"
+                        style="position: absolute;top:5px;right:5px;margin-right: 5px;margin-top: 10px;opacity: 0%;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: aliceblue;" id="fetch_request">
+                    <!--Notification will fetch here-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><b>Close</b></button>
+                    <button type="button" class="btn btn-outline-success"><b>Ok</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-slant-200">
+                <div class="modal-header" style="position: relative;">
+                    <h1 class="modal-title fs-5 text-lime-700" id="staticBackdropLabel">Menu</h1>
+                    <div class="spinner-border text-warning" role="status" id="loader"
+                        style="position: absolute;top:5px;right:5px;margin-right: 5px;margin-top: 10px;opacity: 0%;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: aliceblue;">
+                    <div class="card shadow-lg">
+                        <div class="card-body"
+                            style="height: 400px;overflow-y: scroll;overflow-x: scroll;scrollbar-width:thin;">
+                            <h5 id="alert_text" class="card-title text-warning" style="display: none;"><span><img
+                                        src="/images/restore.png" class="mr-3" width="25px" height="25px"
+                                        style="display: inline;"></span> <b>Menu Restore</b></h5>
+                            <table class="table" id="menuTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Days</th>
+                                        <th scope="col">Item1</th>
+                                        <th scope="col">Item2</th>
+                                        <th scope="col">Item3</th>
+                                        <th scope="col">Item4</th>
+                                        <th scope="col">Additional</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider table-border">
+                                    <!---fetcing table-->
+                                </tbody>
+                            </table>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><b>Close</b></button>
+                    <button type="button" class="btn btn-outline-success" onclick="set_menu_data()"><b>Save</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="overflow-auto touch-auto ...">
+        <table>
+            <thead>
+                <tr id="orderNumbers">
+                    <!--Order numbers fetch here-->
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="list-group overflow-y-auto p-3 m-4 border-success shadow-2xl shadow-green-700 bg-white"
+        style="height: 700px;">
+        <div class="text-light border-primary" style="font-size:xx-large;text-align: center;padding-bottom: 20px; ">
+            <b class="text-lime-700">Task List<span class="text-warning" id="shift"> (Afternoon Shift)</span></b>
+        </div>
+        <div id="fetch">
+            <div style="text-align: center;"><b><span class="text-warning" id="alert">No Task Found</span></b></div>
+            <!--fetch here-->
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyChtcoj-0g8LcHXW26Tyqkm_7Xxj8jG5Ow",
+            authDomain: "food-blur.firebaseapp.com",
+            projectId: "food-blur",
+            storageBucket: "food-blur.appspot.com",
+            messagingSenderId: "911842353467",
+            appId: "1:911842353467:web:3107951f8434294e96571e",
+            measurementId: "G-9WG8FE55NE"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const dataRef = firebase.firestore();
+        const storage = firebase.storage();
+        var data;
+        var totalOrder = 0;
+        var orderToBeDelivered = 0;
+        var delivered = 0;
+        let shift = getTime()
+        set_task_list()
+        function set_task_list() {
+            document.getElementById('shift').innerHTML = ' (' + shift + ' ' + 'Shift' + ')'
+            try {
+                dataRef.collection("vendors").doc(localStorage.getItem('VendorDataId')).collection('orders').where("shift", "in", [shift, "both"]).get()
+                    .then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            var data = doc.data();
+                            document.getElementById('alert').style.display = 'none'
+                            var userDataId = data.userDataId;
+                            let startDate = data.date;
+                            let { resultDate, daysRemaining } = addOneMonthAndCalculateDaysRemaining(startDate);
+                            if (daysRemaining != 0) {
+                                dataRef.collection('users').doc(userDataId).get().then((doc) => {
+                                    var userData = doc.data()
+                                    totalOrder = totalOrder + 1
+                                    if (localStorage.getItem(shift + data.orderId) == 'delivered') {
+                                        var color = 'green'
+                                        var text = 'Delivered'
+                                        delivered = delivered + 1
+                                        document.getElementById("fetch").innerHTML += `
+                            <a href="#" class="list-group-item list-group-item-action bg-slate-200 m-2 hover:bg-gradient-to-r from-black to-green-700 shadow-md shadow-green-700"
+                             aria-current="true" id="${data.orderId}" onclick="if(confirm('Delivered Successfully')){localStorage.setItem('${shift + data.orderId}','delivered');window.location.reload(true)}">
+                            <div class="text-lime-700">
+                              <div class="d-flex w-100 justify-content-between">
+                                <p class="mb-1 fs-5"><b>${userData.firstName + " " + userData.lastName}</b></p>
+                             <small style="color: ${color};"><b>${text}</b></small>
+                              </div>
+                            <p class="mb-1">Address: ${userData.address + "," + userData.city + " " + userData.roomNumber}</p>
+                              <p class="mb-1">Mobile Number : ${userData.mobileNumber}</p>
+                              <small>Order Id: ${data.orderId}</small>
+                              <p class=text-warning>Quantity: ${data.qualtity}</p>
+                             </div>
+                            </a>`
+                                    } else {
+                                        var color = 'red'
+                                        var text = 'Not Delivered'
+                                        orderToBeDelivered = orderToBeDelivered + 1
+                                        document.getElementById("fetch").innerHTML += `
+                            <a href="#"
+                            class="list-group-item list-group-item-action bg-slate-200 m-2 hover:bg-gradient-to-r from-white to-lime-700 shadow-md shadow-green-700"
+                            aria-current="true" id="${data.orderId}" onclick="if(confirm('Delivered Successfully')){localStorage.setItem('${shift + data.orderId}','delivered');window.location.reload(true)};">
+                            <div class="text-lime-700">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <p class="mb-1 fs-5"><b>${userData.firstName + " " + userData.lastName}</b></p>
+                                    <small style="color: ${color};"><b>${text}</b></small>
+                                </div>
+                                <p class="mb-1">${userData.address + "," + userData.city + " " + userData.roomNumber}</p>
+                                <p class="mb-1">Mobile No.${" "}: ${userData.mobileNumber}</p>
+                                <small>Order Id: ${data.orderId}</small>
+                            </div>
+                        </a>
+`
+                                    }
+                                    if (totalOrder == querySnapshot.size) {
+                                        document.getElementById('orderNumbers').innerHTML = `
+                                <th>
+                        <div class="card border-warning mb-3 bg-slate-200 m-5 shadow-md shadow-yellow-600"
+                            style="max-width: 18rem">
+                            <div class="card-body text-warning">
+                                <p class="card-title text-warning fs-3">Total Orders</p>
+                                <p class="card-text fs-5">${totalOrder}</p>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="card border-success mb-3 bg-slate-200 m-5  shadow-md shadow-green-600"
+                            style="max-width: 18rem">
+                            <div class="card-body text-success">
+                                <h1 class="card-title text-success fs-3">Order Delivered</h1>
+                                <p class="card-text fs-5">${delivered}</p>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="card border-danger bg-slate-200 mb-3 m-5  shadow-md shadow-red-600"
+                            style="max-width: 18rem;">
+                            <div class="card-body text-danger">
+                                <h1 class="card-title text-danger fs-3">Not Delivered</h1>
+                                <p class="card-text fs-5" style='text-align:centre'>${orderToBeDelivered}</p>
+                            </div>
+                        </div>
+                    </th>`
+                                    }
+
+                                })
+                            }
+                        })
+                    })
+            } catch (error) {
+                document.getElementById('alert').innerHTML = 'Something went wrong'
+                console.log(error)
+            }
+        }
+
+        get_greeting_data()
+        function get_greeting_data() {
+            var docRef = dataRef.collection("vendors").doc(localStorage.getItem("VendorDataId"));
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    data = doc.data()
+                    data = data['Title']
+                    document.getElementById('status').innerHTML = 'Hii,' + " " + data
+                } else {
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        }
+
+        function addOneMonthAndCalculateDaysRemaining(startDateStr) {
+            let [year, month, day] = startDateStr.split('-').map(Number);
+            let startDate = new Date(year, month - 1, day);
+            startDate.setMonth(startDate.getMonth() + 1);
+            let currentDate = new Date();
+            let timeDiff = startDate.getTime() - currentDate.getTime();
+            let daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            let resultDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1).toString().padStart(2, '0') + '-' + startDate.getDate().toString().padStart(2, '0');
+            return { resultDate, daysRemaining };
+        }
+
+        function getTime() {
+            var currentTime = new Date();
+            var hours = currentTime.getHours();
+            console.log(hours)
+            if (hours >= 6 && hours <= 15) {
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i)
+                    if (key.includes('Night')) {
+                        localStorage.removeItem(key)
+                    }
+                }
+                return 'Afternoon';
+            } else {
+                if (hours >= 16 || hours <= 5) {
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i)
+                        if (key.includes('Afternoon')) {
+                            localStorage.removeItem(key)
+                        }
+                    }
+                    return 'Night';
+                }
+            }
+        }
+
+        function approve(doc_id, user_data_id, user_order_doc_id, diff) {
+            console.log('running')
+            document.getElementById('loader').style.opacity = '100%'
+            dataRef.collection('vendors').doc(localStorage.getItem('VendorDataId')).collection('Notification').doc(doc_id).update({
+                status: "Approved"
+            }).then(() => {
+                dataRef.collection('users').doc(user_data_id).collection('Requests').doc(doc_id).update({
+                    status: "Approved"
+                }).then(() => {
+                    set_difference_in_user_vendor(user_data_id, user_order_doc_id, diff)
+                    console.log("Status changes sucessfully")
+                }).catch((error) => {
+                    console.log(error)
+                    alert('We encountering some technical issues')
+                    document.getElementById('loader').style.opacity = '0%'
+                })
+
+            })
+        }
+
+        function set_difference_in_user_vendor(user_data_id, user_order_doc_id, diff) {
+            dataRef.collection('users').doc(user_data_id).collection('orders').doc(user_order_doc_id).update({
+                'requested_day': diff
+            }).then((doc) => {
+                console.log("difference set in users")
+            }).catch((error) => {
+                document.getElementById('loader').style.opacity = '0%'
+                console.log(error)
+            })
+            dataRef.collection('users').doc(user_data_id).collection('orders').doc(user_order_doc_id).get().then((doc) => {
+                data = doc.data()
+                const vendor_doc_id = data['vendor_doc_id']
+                dataRef.collection('vendors').doc(localStorage.getItem('VendorDataId')).collection('orders').doc(vendor_doc_id).update({
+                    'requested_day': diff
+                }).then((doc) => {
+                    console.log("difference set in vendos")
+                    document.getElementById('loader').style.opacity = '0%'
+                    alert('Request Approved Successfully')
+                    fetch_request()
+                }).catch((error) => {
+                    document.getElementById('loader').style.opacity = '0%'
+                    console.log(error)
+                })
+            }).catch((error) => {
+                document.getElementById('loader').style.opacity = '0%'
+                console.log(error)
+            })
+
+
+        }
+
+        function addDaysToDate(dateString, numDays) {
+            const date = new Date(dateString);
+            date.setDate(date.getDate() + numDays);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+        fetch_request()
+        function fetch_request() {
+            document.getElementById('fetch_request').innerHTML = '';
+            try {
+                dataRef.collection('vendors').doc(localStorage.getItem('VendorDataId')).collection('Notification').get().then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        var data = doc.data();
+                        console.log(data)
+                        if (data['status'] == 'Pending') {
+                            var doc_id = doc.id;
+                            var name = data['userDataId'];
+                            dataRef.collection('users').doc(name).get().then((doc) => {
+                                var user_data = doc.data();
+                                var user_name = user_data['firstName'] + " " + user_data['middleName'] + " " + user_data['lastName'];
+                                document.getElementById('fetch_request').innerHTML += `
+                    <a href="#" class="list-group-item list-group-item-action border p-2 rounded-2 mb-2"
+                        aria-current="true" style="position: relative;">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">${user_name}</h4>
+                            <small>Requested on: ${data['date_of_request']}</small>
+                        </div>
+                        <p>Break Start: ${data['starting_date']}</p>
+                        <p>Break End: ${data['ending_date']}</p>
+                        <p class="mb-1">Total: ${data['diff']} Day</p>
+                        <button type="button" class="btn btn-outline-light"
+                            style="float:right;position: absolute;bottom: 5px;right: 10px;" onclick="approve('${doc_id}', '${data['userDataId']}','${data['user_doc_id']}','${data['diff']}')">Approve</button>
+                    </a>
+                    `;
+                            });
+                        }
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                });
+            } catch (error) {
+                console.log('Encounter some technical issuse');
+                document.getElementById('fetch_request').innerHTML = 'Something went wrong';
+            }
+        }
+
+
+        function set_menu_data() {
+            var table = document.getElementById('menuTable');
+            var rows = table.rows;
+            var menu = [];
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var cells = row.cells;
+                var day = cells[0].innerText;
+                var items = [];
+                for (var j = 1; j < cells.length; j++) {
+                    var cell = cells[j];
+                    items.push(cell.innerText);
+                }
+                menu.push({ day: day, items: items });
+            }
+            menu = JSON.stringify(menu)
+            dataRef.collection('vendors').doc(localStorage.getItem('VendorDataId')).update({
+                'menu': menu
+            }).then(() => {
+                alert('Menu Update Successfully')
+            }).catch((e) => {
+                console.log(e)
+                alert('Something went wrong')
+            })
+        }
+
+
+        get_menu_data()
+        function get_menu_data() {
+            document.querySelector('#menuTable tbody').innerHTML = ''
+            dataRef.collection('vendors').doc(localStorage.getItem('VendorDataId')).get().then((doc) => {
+                data = doc.data()
+                data = data['menu']
+                console.log(data)
+                if (data) {
+                    data = JSON.parse(data)
+                    document.getElementById('alert_text').style.display = 'block'
+                    for (var i = 0; i < data.length; i++) {
+                        var row = data[i];
+                        var day = row.day;
+                        var items = row.items;
+                        // Create a new row and append it to the table body
+                        var tr = document.createElement('tr');
+                        var th = document.createElement('th');
+                        th.scope = "row";
+                        th.innerText = day;
+                        tr.appendChild(th);
+                        for (var j = 0; j < items.length; j++) {
+                            var td = document.createElement('td');
+                            td.contentEditable = "true";
+                            td.innerText = items[j];
+                            tr.appendChild(td);
+                        }
+                        document.querySelector('#menuTable tbody').appendChild(tr);
+                    }
+                } else {
+                    create_table()
+                }
+            }).catch((e) => {
+                console.log(e)
+                alert('Something went wrong')
+            })
+        }
+
+
+        function create_table() {
+            let data = [
+                { "day": "Sunday", "items": ["Edit", "Edit", "Edit", "Edit", "Edit"] },
+                { "day": "Monday", "items": ["Edit", "Edit", "Edit", "Edit", "Edit"] },
+                { "day": "Tuesday", "items": ["Edit", "Edit", "Edit", "Edit", "Edit"] },
+                { "day": "Wednesday", "items": ["Edit", "Edit", "Edit", "Edit", "Edit"] },
+                { "day": "Thursday", "items": ["Edit", "Edit", "Edit", "Edit", "Edit"] },
+                { "day": "Friday", "items": ["Edit", "Edit", "Edit", "Edit", "Edit"] },
+                { "day": "Saturday", "items": ["Edit", "Edit", "Edit", "Edit", "Edit"] }
+            ];
+
+            const tableBody = document.querySelector('#menuTable tbody');
+            tableBody.innerHTML = '';
+
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                const th = document.createElement('th');
+                th.scope = "row";
+                th.innerText = row.day;
+                tr.appendChild(th);
+
+                row.items.forEach(item => {
+                    const td = document.createElement('td');
+                    td.contentEditable = "true";
+                    td.innerText = item;
+                    tr.appendChild(td);
+                });
+
+                tableBody.appendChild(tr);
+            });
+        }
+
+
+    </script>
+
+</body>
+
+</html>
