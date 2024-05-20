@@ -87,8 +87,8 @@
                         usernameSnapshot.forEach(doc => results.add(doc.id));
 
                         results.forEach(docId => {
-                            console.log(docId);
-                            localStorage.getItem('VendorDataId', vendorId)
+                            console.log(docId)
+                            localStorage.setItem('VendorDataId',vendorId)
                             console.log(vendorId)
                             document.getElementById('loader').style.display = 'none'
                             window.location.href = 'patner.html'
