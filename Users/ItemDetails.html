@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="productDetails.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        .star {
+            color: #ccc;
+            cursor: pointer;
+
+        }
+
+        .star.active {
+            color: #ffff00;
+            /* yellow color when clicked */
+        }
+    </style>
 </head>
 
 <body>
@@ -144,7 +156,7 @@
                             style="height: 400px;overflow-y: scroll;overflow-x: scroll;scrollbar-width:thin;">
                             <h5 class="card-title" style="color: #4d7c0f;">Menu</h5>
                             <p class="card-text p-0">
-                            <table class="table">
+                            <table class="table" id="menuTable">
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col">Days</th>
@@ -156,62 +168,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider table-border">
-                                    <tr>
-                                        <th scope="row">Sunday</th>
-                                        <td>Chapati</td>
-                                        <td>Dal</td>
-                                        <td>Gira Rice</td>
-                                        <td>Aanda kari</td>
-                                        <td>Salad</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Monday</th>
-                                        <td>Chapati</td>
-                                        <td>Dal</td>
-                                        <td>Gira Rice</td>
-                                        <td>Aanda kari</td>
-                                        <td>Salad</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Tuesday</th>
-                                        <td>Chapati</td>
-                                        <td>Dal</td>
-                                        <td>Gira Rice</td>
-                                        <td>Aanda kari</td>
-                                        <td>Salad</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Wednesday</th>
-                                        <td>Chapati</td>
-                                        <td>Dal</td>
-                                        <td>Gira Rice</td>
-                                        <td>Aanda kari</td>
-                                        <td>Salad</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Thursday</th>
-                                        <td>Chapati</td>
-                                        <td>Dal</td>
-                                        <td>Gira Rice</td>
-                                        <td>Aanda kari</td>
-                                        <td>Salad</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Friday</th>
-                                        <td>Chapati</td>
-                                        <td>Dal</td>
-                                        <td>Gira Rice</td>
-                                        <td>Aanda kari</td>
-                                        <td>Salad</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Saturday</th>
-                                        <td>Chapati</td>
-                                        <td>Dal</td>
-                                        <td>Gira Rice</td>
-                                        <td>Aanda kari</td>
-                                        <td>Salad</td>
-                                    </tr>
+                                    <!---fetcing table-->
                                 </tbody>
                             </table>
                             </p>
@@ -219,7 +176,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
     </div>
@@ -267,6 +224,44 @@
             <p class="card-text">Wanring: No money will be deduct from the subscription only equivalent amount will be
                 substract when you buy next subscription of same vendor</p>
             <button class="btn btn-outline-primary" id="proceed" disabled>Send Request</button>
+        </div>
+    </div>
+
+    <!---Reviews-->
+    <div class="container text-center border">
+        <div class="row">
+            <div class="col-sm-7" id="get_reviews" style="height: 400px;overflow-y:scroll">
+                <!---fetching reviews-->
+            </div>
+            <div class="col-sm-5">
+                <div class="card m-3 border-2 border-lime-700" style="text-align: left;">
+                    <h5 class="card-header">Add Your Review</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <span class="input-group-text">First and last name</span>
+                            <input type="text" id="name" aria-label="Last name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="validationTextarea" class="form-label">Comments</label>
+                            <textarea class="form-control" id="comments" placeholder="Required example textarea"
+                                required></textarea>
+                            <div class="invalid-feedback">
+                                Please enter a message in the textarea.
+                            </div>
+                            <div class="stars mt-2">
+                                <label for="validationTextarea" style="display: block;" class="form-label">Rate us:
+                                </label>
+                                <span class="star" style=" font-size:xx-large">&#x2605;</span>
+                                <span class="star" style=" font-size:xx-large">&#x2605;</span>
+                                <span class="star" style=" font-size:xx-large">&#x2605;</span>
+                                <span class="star" style=" font-size:xx-large">&#x2605;</span>
+                                <span class="star" style=" font-size:xx-large">&#x2605;</span>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="send">Send Review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -591,6 +586,120 @@
 
         }
 
+
+        get_menu_data()
+        function get_menu_data() {
+            document.querySelector('#menuTable tbody').innerHTML = ''
+            dataRef.collection('vendors').doc(sessionStorage.getItem('cardId')).get().then((doc) => {
+                data = doc.data()
+                data = data['menu']
+                console.log(data)
+                if (data) {
+                    data = JSON.parse(data)
+                    document.getElementById('alert_text').style.display = 'block'
+                    for (var i = 0; i < data.length; i++) {
+                        var row = data[i];
+                        var day = row.day;
+                        var items = row.items;
+                        // Create a new row and append it to the table body
+                        var tr = document.createElement('tr');
+                        var th = document.createElement('th');
+                        th.scope = "row";
+                        th.innerText = day;
+                        tr.appendChild(th);
+                        for (var j = 0; j < items.length; j++) {
+                            var td = document.createElement('td');
+                            td.contentEditable = "true";
+                            td.innerText = items[j];
+                            tr.appendChild(td);
+                        }
+                        document.querySelector('#menuTable tbody').appendChild(tr);
+                    }
+                } else {
+                    create_table()
+                }
+            }).catch((e) => {
+                console.log(e)
+                alert('Something went wrong')
+            })
+        }
+
+
+
+        let rating = {
+            stars: 5,
+            userRating: 0
+        };
+
+        let stars = document.querySelectorAll('.star');
+        stars.forEach(function (star) {
+            star.addEventListener('click', function () {
+                let starIndex = Array.prototype.indexOf.call(stars, star);
+                updateRating(starIndex + 1);
+                displayRating();
+            });
+        });
+
+        function updateRating(stars) {
+            rating.userRating = stars;
+            sessionStorage.setItem('rating', stars)
+        }
+
+        function displayRating() {
+            stars.forEach(function (star, index) {
+                if (index < rating.userRating) {
+                    star.classList.add('active'); /* add active class to make star yellow */
+                } else {
+                    star.classList.remove('active'); /* remove active class to make star gray */
+                }
+            });
+        }
+
+        displayRating(); /* initial display of rating */
+
+        document.getElementById('send').addEventListener('click', () => {
+            let name = document.getElementById('name').value;
+            let comments = document.getElementById('comments').value;
+            let rating = sessionStorage.getItem('rating');
+            try {
+                dataRef.collection('vendors').doc(sessionStorage.getItem('cardId')).collection('reviews').doc().set({
+                    name: name,
+                    comments: comments,
+                    rating: rating
+                }).then(() => {
+                    alert('Review Send Successfully')
+                    get_reviews()
+                }).catch((error) => {
+                    alert('Unable to process task. excuse us')
+                    console.log(error)
+                })
+            } catch (e) {
+                console.log(e)
+            }
+        })
+        get_reviews()
+        function get_reviews() {
+            let flag = true;
+            document.getElementById('get_reviews').innerHTML = '';
+            dataRef.collection('vendors').doc(sessionStorage.getItem('cardId')).collection('reviews').get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    data = doc.data();
+                    flag = false;
+                    document.getElementById('get_reviews').innerHTML += `
+                    <div class="card w-75 m-3 border-2 border-lime-700" style="text-align: left;">
+                        <div class="card-body">
+                            <h5 class="card-title"><img src="/images/profile.png" width="30px" height="30px" class="pr-2">  <span>${data['name']}</span></h5>
+                            <p class="card-text">${data['comments']}</p>
+                            <p style="font-size: x-large"><span style="font-size: x-large">${data['rating']}</span><span style="font-size: xx-large;color:#ffff00">&#x2605;</span>  Rating</p>
+                        </div>
+                    </div>
+                    `;
+                });
+                if (flag) {
+                    document.getElementById('get_reviews').innerHTML = `<h2 class='mt-5 text-danger'>No Reviews Found</h2>`;
+                }
+            });
+        }
     </script>
 </body>
 
