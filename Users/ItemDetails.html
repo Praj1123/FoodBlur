@@ -293,6 +293,8 @@
             data = doc.data();
             half_price = data.half_taffin
             full_price = data.full_taffin
+            console.log(half_price)
+            console.log(full_price)
             document.getElementById("placeholder2").style.display = "none"
             document.getElementById("container2").style.display = "block"
             document.getElementById("render2").innerHTML =
@@ -384,6 +386,7 @@
                     .then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             var data = doc.data();
+                            console.log('running')
                             var vendor_data_id = data.vendor_data_id
                             if (vendor_data_id == card_id) {
                                 console.log('Already buy')
@@ -424,12 +427,12 @@
             var price2Lable = document.getElementById("price2Lable");
             var shift = document.getElementById('shift')
             console.log(shift.value)
-
+            console.log(data.full_taffin)
             if (radio1.checked == true) {
                 price1Lable.style.display = "inline-block";
                 price2Lable.style.display = "none";
                 shift.style.display = 'none'
-                localStorage.setItem("itemPrice", data.full_taffin)
+                localStorage.setItem("itemPrice", full_price)
                 localStorage.setItem('Qualtity', 'full Taffin')
                 localStorage.setItem('shift', 'both')
             } else {
@@ -437,7 +440,7 @@
                     price1Lable.style.display = "none";
                     price2Lable.style.display = "inline-block";
                     shift.style.display = 'block'
-                    localStorage.setItem("itemPrice", data.half_taffin)
+                    localStorage.setItem("itemPrice", half_price)
                     localStorage.setItem('shift', shift.value)
                     localStorage.setItem('Qualtity', 'Half Taffin')
                 }
